@@ -1,6 +1,6 @@
 <img src="LogoRetaMH_color.png" style="center">
 
-En este documento, exploraremos los servicios más utilizados de Amazon Web Services (AWS), como VPC, grupos de seguridad, EC2, RDS, entre otros.
+En este seminario, exploraremos los servicios más utilizados de Amazon Web Services (AWS), como VPC, grupos de seguridad, EC2, RDS, entre otros.
 
 ## Indice 🚀
 
