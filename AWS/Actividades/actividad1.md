@@ -27,16 +27,16 @@ Una Amazon Virtual Private Cloud (VPC) es un servicio que permite lanzar recurso
 En resumen, una VPC proporciona un control total sobre nuestro entorno de red en la nube, permitiéndonos definir y gestionar la infraestructura de manera segura y eficiente.
 
 Crea una VPC con los siguientes datos:
-Nombre: lab
-CIDR: 10.0.0.0/16
-Sin bloque de CIDR IPv6
-solo una zona de disponibilidad
-En La zona: us-east-1a
-Con una subred pública  en el  10.0.0.0/24 y una subred privada 10.0.1.0/24
-No crearemos un NAT gateways de S3
-Y la resolución de DNS estará activa
+* Nombre: lab
+* CIDR: 10.0.0.0/16
+* Sin bloque de CIDR IPv6
+* Solo una zona de disponibilidad
+* En La zona: us-east-1a
+* Con una subred pública  en el  10.0.0.0/24 y una subred privada 10.0.1.0/24
+* No crearemos un NAT gateways de S3
+* La resolución de DNS estará activa
 
-El resultado será:
+El resultado es:
 
  **VPC:** `lab-vpc`
 
