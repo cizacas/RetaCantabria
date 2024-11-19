@@ -21,7 +21,7 @@ En este ejercicio vamos a crear una instancia de base de datos `MySQL` administr
 
 Al final, la infraestructura de la base de datos será la siguiente:
 
-<img src="/Imagenes/imagenfinal2.png" width="800">
+<img src="/AWS/Imagenes/imagenfinal2.png" width="800">
 
 ## Crear un grupo de seguridad para la instancia de base de datos de RDS
 
@@ -161,23 +161,23 @@ Al grupo de seguridad creado añadimos una nueva regla de entrada para que permi
    
 Ahora al grupo de subredes creado tendremos que configurar que cada una de las subredes asignarlas en la Tabla de rutas asignar el **igw-xxxxx** para acceso a internet
 
-1. En el menú <span id="ssb_services">Servicios<i class="fas fa-angle-down"></i></span>, haga clic en **RDS**.
+6. En el menú <span id="ssb_services">Servicios<i class="fas fa-angle-down"></i></span>, haga clic en **RDS**.
    
-2. En el panel de navegación izquierdo, haga clic en **Grupos de subredes**.
+7. En el panel de navegación izquierdo, haga clic en **Grupos de subredes**.
    
-3. Seleccina el grupo de subredes creado  `grupo de subredes de base de datos`  y por cada una de las subredes asociadas ver el enrutador asociado (tablas de enrutamiento). 
+8. Seleccina el grupo de subredes creado  `grupo de subredes de base de datos`  y por cada una de las subredes asociadas ver el enrutador asociado (tablas de enrutamiento). 
    
-4. Al enrutador **rtb-xxxx** asociar asociarle **lab-igw**, la puerta de enlace de internet.
+9. Al enrutador **rtb-xxxx** asociar asociarle **lab-igw**, la puerta de enlace de internet.
    
-5. Una vez tengamos configurado el enrutador con la puerta de enlace de internet podemos configurar el acceso desde MySQLWorkbench. Los datos que necesitamos de la RDS creada son:
+10. Una vez tengamos configurado el enrutador con la puerta de enlace de internet podemos configurar el acceso desde MySQLWorkbench. Los datos que necesitamos de la RDS creada son:
     - **Punto de enlace & puerto**, lo encontramos una vez seleccionada la base de datos en el apartado `conectividad & seguridad`
     - **Nombre del usuario maestro**, lo entcontramos una vez seleccionada la base de datos en el apartado `Configuracion` y la password dada a la base de datos 
-6. Configuramos la conexión en MySQLWorkBench:
+11. Configuramos la conexión en MySQLWorkBench:
     - **Hostname**, ponemos el valor de `punto de enlace` de la base de datos
     - **port**, ponemos  el valor de `puerto` de la base de datos
     - **Username**, ponemos el valor de `nombre del usuario maestro` de la base de datos
     - **Password**, ponemos el valor de la password dada en el creación de la base de datos
-7. Probamos la conexión  y creamos el esquema de base de datos que necesitamos para realizar el despliegue de la aplicación
+12. Probamos la conexión  y creamos el esquema de base de datos que necesitamos para realizar el despliegue de la aplicación
 ## Desplegar una aplicación web en el servidor web con interación a la RDS creada
 
 1. Primero tendremos que conectarnos a traves de ssh con el servidor web que reside en la instancia EC2 creada. Realizar las siguientes comprobaciones:

@@ -19,7 +19,7 @@ systemctl status apache2
 3. Comprobar que funciona correctamente. En cualquier navegador acceder por el `DNS` o por la `ip pública` de la instancia. Nos muestra la página web por defecto de Apache 
 Ejemplo: 
 http://ec2-3-89-85-127.compute-1.amazonaws.com/
-![imagen funciona](/Imagenes/apache.jpg)
+![imagen funciona](/AWS/Imagenes/apache.jpg)
 
 4. Configuración de un host virtual. 
 Un host virtual en Apache2 permite alojar múltiples sitios web en un solo servidor. Cada sitio puede tener su propio dominio y configuración. Hay dos tipos de hosts virtuales:
@@ -102,7 +102,7 @@ systemctl status apache
 ```
 9. En el navegador comprobar que atiende a nuestra página
 http://ec2-3-89-85-127.compute-1.amazonaws.com/
-![imagen funciona](/Imagenes/miPagina.jpg)
+![imagen funciona](/AWS/Imagenes/miPagina.jpg)
 
 10. Ahora debemos configurar un firewall para garantizar que solo el tráfico necesario pueda llegar a su proxy inverso. Usaremos Uncomplicated Firewall (UFW) para este propósito.
 ```sh
@@ -167,4 +167,4 @@ nano info.php #copio la información de la página
 ```
 En el navegador vamos a llamar a la página para comprobar que todo esta correcto
 Ejemplo
-![imagen funciona](/Imagenes/infoPHP.jpg)
+![imagen funciona](/AWS/Imagenes/infoPHP.jpg)
