@@ -105,7 +105,7 @@ systemctl status apache
 http://ec2-3-89-85-127.compute-1.amazonaws.com/
 ![imagen funciona](img/miPagina.jpg)
 
-10. Ahora debemos configurar un firewall para garantizar que solo el tráfico necesario pueda llegar a su proxy inverso. Usaremos Uncomplicated Firewall (UFW) para este propósito.
+10.  Ahora debemos configurar un firewall para garantizar que solo el tráfico necesario pueda llegar al servidor. Usaremos Uncomplicated Firewall (UFW) para este propósito.
 ```sh
 # comprobamos si está ya instalado en el sistema y en que estado está
 ufw status
