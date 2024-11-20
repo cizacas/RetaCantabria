@@ -83,7 +83,9 @@ cd /etc/apache2/sites-available/
 cp 000-default.conf miWeb.conf
 nano miWeb.conf # cambiar DocumentRoot
 ```
-5. Podemos comprobar que no hemos cometido errores de sintaxis en el fichero de configuración creado
+5. Configuración de un host virtual. 
+
+Podemos comprobar que no hemos cometido errores de sintaxis en el fichero de configuración creado
 ```sh
 apache2ctl configtest
 ```
@@ -105,7 +107,7 @@ systemctl status apache
 http://ec2-3-89-85-127.compute-1.amazonaws.com/
 ![imagen funciona](img/miPagina.jpg)
 
-10.  Ahora debemos configurar un firewall para garantizar que solo el tráfico necesario pueda llegar al servidor. Usaremos Uncomplicated Firewall (UFW) para este propósito.
+10. Ahora debemos configurar un firewall para garantizar que solo el tráfico necesario pueda llegar al servidor. Usaremos Uncomplicated Firewall (UFW) para este propósito.
 ```sh
 # comprobamos si está ya instalado en el sistema y en que estado está
 ufw status
@@ -128,10 +130,9 @@ Los pasos a seguir son:
 ```sh
 apt update
 ```
-2. Instalar php 
+2. Instalar php
 ```sh
 apt install php libapache2-mod-php php-mysql
-
 ```
 3. Configurar php
 Para configurar este lenguaje de programación trabajaremos en primer lugar sobre el archivo de configuración del módulo del servicio web. Si has instalado la versión incluida en Ubuntu 24.04 LTS. El fichero de configuración `php.ini` se encuentra en `/etc/php/8.3/apache2/php.ini`
