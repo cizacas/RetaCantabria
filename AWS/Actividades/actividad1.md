@@ -9,7 +9,7 @@ En este ejercicio vamos a crear Amazon Virtual Private Cloud (VPC), un grupo de 
     - [Ejemplo de uso:](#ejemplo-de-uso-1)
   - [Crear una Máquina Virtual](#crear-una-máquina-virtual)
     - [Pasos para crear una instancia EC2:](#pasos-para-crear-una-instancia-ec2)
-    - [conectarnos a la máquina](#conectarnos-a-la-máquina)
+    - [Conectarnos a la máquina](#conectarnos-a-la-máquina)
 
 ## Crear una VPC
 Una Amazon Virtual Private Cloud (VPC) es un servicio que permite lanzar recursos de AWS en una red virtual que nosotros definimos. Esta red virtual se asemeja a una red tradicional que operaría en su propio centro de datos, con los beneficios de utilizar la infraestructura escalable de AWS.
@@ -21,8 +21,8 @@ Una Amazon Virtual Private Cloud (VPC) es un servicio que permite lanzar recurso
 5. **Escalabilidad**: Permite escalar nuestros recursos de red según sea necesario.
 
 ### Ejemplo de uso:
-**Subred pública**: Para instancias que necesitan acceso directo a Internet.
-**Subred privada**: Para instancias que no necesitan acceso directo a Internet, pero pueden acceder a través de una NAT Gateway.
+* **Subred pública**: Para instancias que necesitan acceso directo a Internet.
+* **Subred privada**: Para instancias que no necesitan acceso directo a Internet, pero pueden acceder a través de una NAT Gateway.
 
 En resumen, una VPC proporciona un control total sobre nuestro entorno de red en la nube, permitiéndonos definir y gestionar la infraestructura de manera segura y eficiente.
 
@@ -59,16 +59,17 @@ El resultado es:
 
 `lab-igw` es una *puerta de enlace de Internet* que es un recurso de VPC que permite la comunicación entre instancias EC2 en su VPC e Internet.
 
-La subred pública `lab-subnet-public1-us-east-1a` tiene un CIDR de **10.0.0.0/24**, lo que significa que contiene todas las direcciones IP que comienzan con **10.0.0.x**. El hecho de que la tabla de rutas asociada con esta subred pública enrute el tráfico de red 0.0.0.0/0 a la puerta de enlace de Internet es lo que la convierte en una subred pública.
+La subred pública `lab-subnet-public1-us-east-1a` tiene un CIDR de **10.0.0.0/24**, lo que significa que contiene todas las direcciones IP que comienzan con **10.0.0.x**. El hecho de que la tabla de rutas asociada con esta subred pública enruta el tráfico de red 0.0.0.0/0 a la puerta de enlace de Internet es lo que la convierte en una subred pública.
+
 La subred privada `lab-subnet-private1-us-east-1a` tiene un CIDR de **10.0.1.0/24**, lo que significa que contiene todas las direcciones IP que comienzan con **10.0.1.x**.
 
-No hemos creado un _NAT Gateway_ que es un recurso de VPC que se utiliza para proporcionar conectividad a Internet a cualquier instancia EC2 que se ejecute en subredes *privadas* en la VPC sin que esas instancias EC2 necesiten tener una conexión directa a la puerta de enlace de Internet porque es un servicio que consume muchos recursos y de momento no vamos a utilizar.
+No hemos creado un _NAT Gateway_ que es un recurso de VPC que se utiliza para proporcionar conectividad a Internet a cualquier instancia EC2 que se ejecute en subredes *privadas* en la VPC sin que esas instancias EC2 necesiten tener una conexión directa a la puerta de enlace de Internet porque es un servicio que consume muchos recursos y de momento no vamos a utilizarlo.
 
 ![imagen vpc](/AWS/Imagenes/vpc.jpg)
 
 
 ## Crear un grupo de seguridad
-Un grupo de seguridad en AWS es un conjunto de reglas que controlan el tráfico entrante y saliente de las instancias de Amazon EC2. Actúa como un firewall virtual para sus instancias, permitiendonos controlar el acceso a ellas.
+Un grupo de seguridad en AWS es un conjunto de reglas que controlan el tráfico entrante y saliente de las instancias de Amazon EC2. Actúa como un firewall virtual para sus instancias, permitiéndonos controlar el acceso a ellas.
 
 ### Características principales de un grupo de seguridad:
 1. **Reglas de entrada**: Definen el tráfico que se permite entrar a las instancias asociadas.
@@ -84,10 +85,10 @@ En resumen, los grupos de seguridad nos permiten definir reglas detalladas para 
 
 Creamos un grupo de seguridad de nombre `grupo-seguridad-web`  que permita abrir el puerto 80 y el puerto 22
 
-Nombre: grupo-seguridad-web
-Descripcion: permitir el tráfico SSH y HTTP entrante
-VPC que pertenezca a la VPC creada Lab
-Crear las reglas de entrada de SSH y HTTP desde cualquier ip
+* Nombre: grupo-seguridad-web
+* Descripcion: permitir el tráfico SSH y HTTP entrante
+* VPC que pertenezca a la VPC creada Lab
+* Crear las reglas de entrada de SSH y HTTP desde cualquier ip
 
 El resultado será:
 ![gruposeguridad](/AWS/Imagenes/grupoSeguridad.jpg)
@@ -108,24 +109,24 @@ En resumen, crear una instancia EC2 en AWS implica configurar y lanzar una máqu
 
 Para crear la instancia nos vamos a la opción **Lanzar la instancia**
 
-Crear una instancia EC2 en la subred pública creada con anterioridad
-Nombre: miServidorWeb 
-seleccionamos una AMI Ubuntu server 22.04 con disco SSD nos indica que es apto para la capa gratuita
-Con un T2 micro
-Selecciona el par de claves __vockey__ (siempre para los laboratorios eligiremos estas claves)
-Crearla cambiamos a nuestra VPC creada, elegimos en la subred pública `lab-subnet-public1-us-east-1a` y habilitar la ip pública
-Que tenga el grupo de seguridad `grupo-seguridad-web`
-Agregamos un nuevo volumen con 30 gigas de disco
+* Crear una instancia EC2 en la subred pública creada con anterioridad
+* Nombre: miServidorWeb 
+* seleccionamos una AMI Ubuntu server 22.04 con disco SSD nos indica que es apto para la capa gratuita
+* Con un T2 micro
+* Selecciona el par de claves __vockey__ (siempre para los laboratorios eligiremos estas claves)
+* Cambiamos a nuestra VPC creada, elegimos en la subred pública `lab-subnet-public1-us-east-1a` 
+* Habilitar la ip pública
+* Que tenga el grupo de seguridad `grupo-seguridad-web`
+* Agregamos un nuevo volumen con 30 gigas de disco
 
-### conectarnos a la máquina 
+### Conectarnos a la máquina 
 En la instancia desde la opción __Connect__ seleccionamos `conectarse mediante la Conexión de la instancia EC2 ` , como no hemos cambiado el usuario será ubuntu.
-Para ello utiliza el para de claves vockey,lo acaba de inyectar para conectarnos
-Podemos trabajar directamente conectados a esta consola
+Para ello utiliza el par de claves vockey,lo acaba de inyectar para conectarnos y así podemos trabajar directamente conectados a la consola
 
 ![imagen conexion](/AWS/Imagenes/conexion.jpg)
 
 
-O tenemos la opción de conectarnos desde el terminal utilizando bien WindowsPowerShell o Putty  ambos utilizan el protocolo SSH 
+O tenemos la opción de conectarnos desde el terminal utilizando bien WindowsPowerShell, CMD o Putty  utilizando el protocolo SSH 
 
 La conexión a utilizar en Windows PowerShell  es __SSH cliente__
 Para ver donde se encuentran las credenciales vockey, nos vamos al panel del laboratorio y vamos a la opción **AWS Detalles** 
@@ -141,10 +142,11 @@ ssh -i "<ruta_archivo_labsuser.pem>" ubuntu@<IP_publica>
 
 ssh -i "<ruta_archivo_labsuser.pem>" ubuntu@<DNS>
 ```
-Es conveniente que el archivo se encuentre en un lugar que no sea público y al ser posible que solo el usuario pueda acceder a él.  Si es linux las recomendaciones que AWS hace estan en la siguiente pantalla
+Es conveniente que el archivo se encuentre en un lugar que no sea público y al ser posible que solo el usuario pueda acceder a él.  
+
 ![imagen conexion](/AWS/Imagenes/conexion2.jpg)
 
-Abrimos de nuevo una consola cmd, he utilizado una consola de git cmd y ahora nos dejará conectarnos, si eliges la opción del DNS es mejor puesto que la `ip publica` cambia cada vez que arranques la instancia, se puede configurar para que sea estática denominada en amazon ip-elástica pero nos consume recursosy realmente no hace falta. 
+Abrimos de nuevo una consola cmd, he utilizado una consola de git cmd y ahora nos dejará conectarnos, si eliges la opción del DNS es mejor puesto que la `ip publica` cambia cada vez que arranques la instancia, se puede configurar para que sea estática denominada en amazon ip-elástica pero nos consume recursos y realmente no hace falta. 
 
 ![imagen conexion](/AWS/Imagenes/conectaranfitrion.jpg)
 

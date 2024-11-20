@@ -121,11 +121,14 @@ Las implementaciones ***Multi-AZ*** de Amazon RDS proporcionan mejoras en la dis
    - **Tipo de almacenamiento**: _SSD de uso general (gp3)_
    - **Almacenamiento asignado:** _20_
 10. En **Conectividad**, configuramos lo siguiente:
+
    - **Nube privada virtual (VPC):** _Lab VPC_
 11. En **Grupos de subredes de la base de datos**, en la lista desplegable:
+
    - Elegir _grupos de seguridad de base de datos_.
    - Anule la selección _predeterminada_.
 12. En **Acceso público** , vamos a ponerlo `si`:
+
     - normalmente esta propiedad estara a no pero para permitir que nos conectemos desde fuera a la BD con el MySQLWorkbench lo vamos a poner público
 13. En **grupo de seguridad VPC firewall** vamos a crear uno nuevo para permitir la conexión exterior nombre `grupo acceso exterior bd`
 14.  en **Configuración adicional** configuramos lo siguiente:
@@ -139,6 +142,7 @@ Las implementaciones ***Multi-AZ*** de Amazon RDS proporcionan mejoras en la dis
 15. Haga clic en <span id="ssb_orange">Crear base de datos</span>
    Ahora se lanzará  el scrip de creación de la base de datos.
 16. Haga clic en **lab-db** (haga clic en el propio enlace).
+
    Esperar **aproximadamente 4 minutos** para que se habilite la disponibilidad de la base de datos. El proceso de implementación implica la implementación de una base de datos en dos zonas de disponibilidad diferentes.
 17. Esperar hasta que **Información** cambie de **Modificando** a **Disponible**.
 
@@ -148,7 +152,7 @@ Esto no es habitual porque como hemos visto la base de datos ha sido creada en l
 Un paso que hemos realizado anteriormente es crear la base de datos con **acceso público**  y ahora tendremos que abrir el paso de acceso a través de internet.
 y hemos añadido un nuevo grupo de seguridad  `grupo acceso exterior bd`
 
-Al grupo de seguridad creado añadimos una nueva regla de entrada para que permita la conexión desde cualquier ip por el puerto 3306
+Al grupo de seguridad creado añadimos una nueva regla de entrada para que permita la conexión desde cualquier ip por el puerto 3306. Otra opción más segura es crear un *NAT Gateway* .
 
 1. En la **consola de administración de AWS**, encontraremos el menú <span id="ssb_services">Servicios, <i class="fas fa-angle-down"></i></span> donde debe hacer clic en **VPC**.
 
@@ -157,27 +161,29 @@ Al grupo de seguridad creado añadimos una nueva regla de entrada para que permi
 3. Haga clic en <span id="ssb_orange"> seleccionar el grupo acceso exterior bd</span>  y, a continuación, configure lo siguiente:
 4. En el panel **Reglas de entrada**, seleccione <span id="ssb_white">Editar reglas de entrada</span>  y modificamos la regla para permitir desde cualquier IP con los datos que figuran a continuación.
 5. Configurar el siguiente ajuste:
+
    - **Anywhere-ipV4**
    
 Ahora al grupo de subredes creado tendremos que configurar que cada una de las subredes asignarlas en la Tabla de rutas asignar el **igw-xxxxx** para acceso a internet
 
-6. En el menú <span id="ssb_services">Servicios<i class="fas fa-angle-down"></i></span>, haga clic en **RDS**.
+1. En el menú <span id="ssb_services">Servicios<i class="fas fa-angle-down"></i></span>, haga clic en **RDS**.
    
-7. En el panel de navegación izquierdo, haga clic en **Grupos de subredes**.
+2. En el panel de navegación izquierdo, haga clic en **Grupos de subredes**.
    
-8. Seleccina el grupo de subredes creado  `grupo de subredes de base de datos`  y por cada una de las subredes asociadas ver el enrutador asociado (tablas de enrutamiento). 
+3. Seleccina el grupo de subredes creado  `grupo de subredes de base de datos`  y por cada una de las subredes asociadas ver el enrutador asociado (tablas de enrutamiento). 
    
-9. Al enrutador **rtb-xxxx** asociar asociarle **lab-igw**, la puerta de enlace de internet.
+4. Al enrutador **rtb-xxxx** asociar asociarle **lab-igw**, la puerta de enlace de internet.
    
-10. Una vez tengamos configurado el enrutador con la puerta de enlace de internet podemos configurar el acceso desde MySQLWorkbench. Los datos que necesitamos de la RDS creada son:
+5.  Una vez tengamos configurado el enrutador con la puerta de enlace de internet podemos configurar el acceso desde MySQLWorkbench. Los datos que necesitamos de la RDS creada son:
     - **Punto de enlace & puerto**, lo encontramos una vez seleccionada la base de datos en el apartado `conectividad & seguridad`
     - **Nombre del usuario maestro**, lo entcontramos una vez seleccionada la base de datos en el apartado `Configuracion` y la password dada a la base de datos 
-11. Configuramos la conexión en MySQLWorkBench:
+6.  Configuramos la conexión en MySQLWorkBench:
     - **Hostname**, ponemos el valor de `punto de enlace` de la base de datos
     - **port**, ponemos  el valor de `puerto` de la base de datos
     - **Username**, ponemos el valor de `nombre del usuario maestro` de la base de datos
     - **Password**, ponemos el valor de la password dada en el creación de la base de datos
-12. Probamos la conexión  y creamos el esquema de base de datos que necesitamos para realizar el despliegue de la aplicación
+7.  Probamos la conexión  y creamos el esquema de base de datos que necesitamos para realizar el despliegue de la aplicación
+
 ## Desplegar una aplicación web en el servidor web con interación a la RDS creada
 
 1. Primero tendremos que conectarnos a traves de ssh con el servidor web que reside en la instancia EC2 creada. Realizar las siguientes comprobaciones:
@@ -193,16 +199,15 @@ apt install zip
 # descomprimir
 unzip eb-demo-php-simple-app-v1.3.zip
 ```
-3. Tendremos que instalar composer en el servidor. Un artículo de ayuda es https://www.ionos.es/digitalguide/servidores/configuracion/instalar-php-composer-en-ubuntu-2204/
+1. Tendremos que instalar composer en el servidor. Un artículo de ayuda es https://www.ionos.es/digitalguide/servidores/configuracion/instalar-php-composer-en-ubuntu-2204/
 ```sh
 apt install curl php-mbstring git
 # instalar composer
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 composer
 ```
-
-4. Realizar los cambios en el fichero .env  y es posible en la configuración del virtual host para que el directorio de despliegue coincida con nuestra estructura de carpetas
-5. Conectar la BD con la instancia EC2. En **RDS** seleccionamos la base de datos `lab-db`  y en el botón **Acciones** tenemos la acción `Configurar conexión de EC2`  seleccionamos nuestra instancia _miServidorWeb_ y se crean los grupos de seguridad **rds-ec2-1**  y **ec2-rds-1** que abren las conexiones entre la RDS y la instancia.
-6. Estamos en condiciones de probar la conexión y el funcionamiento de la web
+2. Realizar los cambios en el fichero .env  y es posible en la configuración del virtual host para que el directorio de despliegue coincida con nuestra estructura de carpetas
+3. Conectar la BD con la instancia EC2. En **RDS** seleccionamos la base de datos `lab-db`  y en el botón **Acciones** tenemos la acción `Configurar conexión de EC2`  seleccionamos nuestra instancia _miServidorWeb_ y se crean los grupos de seguridad **rds-ec2-1**  y **ec2-rds-1** que abren las conexiones entre la RDS y la instancia.
+4. Estamos en condiciones de probar la conexión y el funcionamiento de la web
 
   

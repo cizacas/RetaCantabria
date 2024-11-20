@@ -24,8 +24,8 @@ http://ec2-3-89-85-127.compute-1.amazonaws.com/
 4. Configuración de un host virtual. 
 Un host virtual en Apache2 permite alojar múltiples sitios web en un solo servidor. Cada sitio puede tener su propio dominio y configuración. Hay dos tipos de hosts virtuales:
 
-1. **Hosts virtuales basados en nombre**: Permiten que varios dominios compartan la misma dirección IP.
-2. **Hosts virtuales basados en IP**: Cada dominio tiene su propia dirección IP.
+* **Hosts virtuales basados en nombre**: Permiten que varios dominios compartan la misma dirección IP.
+* **Hosts virtuales basados en IP**: Cada dominio tiene su propia dirección IP.
 
 Aquí tienes un ejemplo de configuración de un host virtual basado en nombre:
 
@@ -46,7 +46,8 @@ Guarda esta configuración en un archivo dentro de `/etc/apache2/sites-available
 sudo a2ensite nombre_del_archivo.conf
 sudo systemctl reload apache2
 ```
-En Ubuntu tiene habilitado un bloque de servidor por defecto, que esta configurado para proporcionar documentos del directorio /var/www/html. Sin embargo, nosotros vamos a crear otro directorio de publicación web.
+En Ubuntu tiene habilitado un bloque de servidor por defecto, que esta configurado para proporcionar documentos del directorio `/var/www/html`. Sin embargo, nosotros vamos a crear otro directorio de publicación web.
+
 Realizamos los siguientes pasos:
 ```sh
 # Crearemos un directorio dentro de /var/www que denominaremos miWeb
@@ -55,7 +56,7 @@ mkdir /var/www/miWeb
 chmod -R 755 /var/www/miWeb
 ```
 A continuación,  crear una página de ejemplo denominada `index.html` por ejemplo:
-crear una página HTML5 simple que muestre un mensaje de bienvenida a la página web "miWeb", puedes usar el siguiente código:
+Crear una página HTML5 simple que muestre un mensaje de bienvenida a la página web "miWeb", puedes usar el siguiente código:
 ```html
 <!DOCTYPE html>
 <html lang="es">
@@ -155,7 +156,7 @@ systemctl status apache2
 4. Para comprobar PHP  creamos en una página denominada `info.php` que tendrá la siguiente información:
 ```php
 <?php
-phpinfo();
+    phpinfo();
 ?>
 ```
 los pasos son:
