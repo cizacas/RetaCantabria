@@ -116,27 +116,25 @@ Las implementaciones ***Multi-AZ*** de Amazon RDS proporcionan mejoras en la dis
 
    - **Clases con ráfagas incluye clases t** .
    - Selecciona _db.t3.micro_
-9.  En **Almacenamiento**, configuramos lo siguiente:
-
-   - **Tipo de almacenamiento**: _SSD de uso general (gp3)_
-   - **Almacenamiento asignado:** _20_
+9. En **Almacenamiento**, configuramos lo siguiente:
+    
+    - **Tipo de almacenamiento**: _SSD de uso general (gp3)_
+    - **Almacenamiento asignado:** _20_
 10. En **Conectividad**, configuramos lo siguiente:
-
-   - **Nube privada virtual (VPC):** _Lab VPC_
+    
+    - **Nube privada virtual (VPC):** _Lab VPC_
 11. En **Grupos de subredes de la base de datos**, en la lista desplegable:
-
-   - Elegir _grupos de seguridad de base de datos_.
-   - Anule la selección _predeterminada_.
+    - Elegir _grupos de seguridad de base de datos_.
+    - Anule la selección _predeterminada_.
 12. En **Acceso público** , vamos a ponerlo `si`:
-
-    - normalmente esta propiedad estara a no pero para permitir que nos conectemos desde fuera a la BD con el MySQLWorkbench lo vamos a poner público
+   Normalmente esta propiedad estara a no pero para permitir que nos conectemos desde fuera a la BD con el MySQLWorkbench lo vamos a poner público
 13. En **grupo de seguridad VPC firewall** vamos a crear uno nuevo para permitir la conexión exterior nombre `grupo acceso exterior bd`
-14.  en **Configuración adicional** configuramos lo siguiente:
-
-   - **Nombre de base de datos inicial**: `lab`
-   - Desactivar **Habilitar copias de seguridad automáticas**.
-   - Desactivar **Habilitar el cifrado**.
-   - Desactivar **Habilitar actualización automática de versiones secundarias** .
+14. En **Configuración adicional** configuramos lo siguiente:
+    
+    - **Nombre de base de datos inicial**: `lab`
+    - Desactivar **Habilitar copias de seguridad automáticas**
+    - Desactivar **Habilitar el cifrado**.
+    - Desactivar **Habilitar actualización automática de versiones secundarias** .
 
    <i class="fas fa-comment"></i> Esto desactivará las copias de seguridad, lo que no suele recomendarse, pero permitirá una implementación más rápida de la base de datos para este ejercicio.
 15. Haga clic en <span id="ssb_orange">Crear base de datos</span>
@@ -190,7 +188,7 @@ Ahora al grupo de subredes creado tendremos que configurar que cada una de las s
    -  Tenemos instalado un servidor apache y hemos creado un virtual host que apunta a un directorio donde desplegar la web
    -  Tenemos instalado php de versión 8.* 
 2. Lo siguiente es subir al directorio de despliegue web la aplicación php desarrollada. Una forma es utilizando el [comando scp](https://desarrolloweb.com/articulos/transferir-archivos-scp-ssh.html)
-   - lo mejor es subir un archivo.zip.  Es posible que tengas que instalar en el servidor la aplicación zip y unzip
+   - Lo mejor es subir un archivo.zip.  Es posible que tengas que instalar en el servidor la aplicación zip y unzip
 ```sh
 scp -i "labsuser.pem" eb-demo-php-simple-app-v1.3.zip ubuntu@ec2-34-207-226-176.compute-1.ama
 zonaws.com:/var/www/miWeb
@@ -199,15 +197,15 @@ apt install zip
 # descomprimir
 unzip eb-demo-php-simple-app-v1.3.zip
 ```
-1. Tendremos que instalar composer en el servidor. Un artículo de ayuda es https://www.ionos.es/digitalguide/servidores/configuracion/instalar-php-composer-en-ubuntu-2204/
+3. Tendremos que instalar composer en el servidor. Un artículo de ayuda es https://www.ionos.es/digitalguide/servidores/configuracion/instalar-php-composer-en-ubuntu-2204/
 ```sh
 apt install curl php-mbstring git
 # instalar composer
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 composer
 ```
-2. Realizar los cambios en el fichero .env  y es posible en la configuración del virtual host para que el directorio de despliegue coincida con nuestra estructura de carpetas
-3. Conectar la BD con la instancia EC2. En **RDS** seleccionamos la base de datos `lab-db`  y en el botón **Acciones** tenemos la acción `Configurar conexión de EC2`  seleccionamos nuestra instancia _miServidorWeb_ y se crean los grupos de seguridad **rds-ec2-1**  y **ec2-rds-1** que abren las conexiones entre la RDS y la instancia.
-4. Estamos en condiciones de probar la conexión y el funcionamiento de la web
+4. Realizar los cambios en el fichero .env  y es posible en la configuración del virtual host para que el directorio de despliegue coincida con nuestra estructura de carpetas
+5. Conectar la BD con la instancia EC2. En **RDS** seleccionamos la base de datos `lab-db`  y en el botón **Acciones** tenemos la acción `Configurar conexión de EC2`  seleccionamos nuestra instancia _miServidorWeb_ y se crean los grupos de seguridad **rds-ec2-1**  y **ec2-rds-1** que abren las conexiones entre la RDS y la instancia.
+6. Estamos en condiciones de probar la conexión y el funcionamiento de la web
 
   
