@@ -65,7 +65,7 @@ La subred privada `lab-subnet-private1-us-east-1a` tiene un CIDR de **10.0.1.0/2
 
 No hemos creado un _NAT Gateway_ que es un recurso de VPC que se utiliza para proporcionar conectividad a Internet a cualquier instancia EC2 que se ejecute en subredes *privadas* en la VPC sin que esas instancias EC2 necesiten tener una conexión directa a la puerta de enlace de Internet porque es un servicio que consume muchos recursos y de momento no vamos a utilizarlo.
 
-![imagen vpc](/AWS/Imagenes/vpc.png)
+![imagen vpc](img/vpc.png)
 
 
 ## Crear un grupo de seguridad
@@ -91,7 +91,7 @@ Creamos un grupo de seguridad de nombre `grupo-seguridad-web`  que permita abrir
 * Crear las reglas de entrada de SSH y HTTP desde cualquier ip
 
 El resultado será:
-![gruposeguridad](/AWS/Imagenes/grupoSeguridad.jpg)
+![gruposeguridad](img/grupoSeguridad.jpg)
 
 ## Crear una Máquina Virtual
 Crear una instancia en AWS significa lanzar una máquina virtual en la nube de Amazon Web Services (AWS) utilizando el servicio Amazon Elastic Compute Cloud (EC2). Una instancia EC2 es un servidor virtual que puede ejecutar aplicaciones y servicios como si fuera un servidor físico.
@@ -123,7 +123,7 @@ Para crear la instancia nos vamos a la opción **Lanzar la instancia**
 En la instancia desde la opción __Connect__ seleccionamos `conectarse mediante la Conexión de la instancia EC2 ` , como no hemos cambiado el usuario será ubuntu.
 Para ello utiliza el par de claves vockey,lo acaba de inyectar para conectarnos y así podemos trabajar directamente conectados a la consola
 
-![imagen conexion](/AWS/Imagenes/conexion.jpg)
+![imagen conexion](img/conexion.jpg)
 
 
 O tenemos la opción de conectarnos desde el terminal utilizando bien WindowsPowerShell, CMD o Putty  utilizando el protocolo SSH 
@@ -131,7 +131,7 @@ O tenemos la opción de conectarnos desde el terminal utilizando bien WindowsPow
 La conexión a utilizar en Windows PowerShell  es __SSH cliente__
 Para ver donde se encuentran las credenciales vockey, nos vamos al panel del laboratorio y vamos a la opción **AWS Detalles** 
 
-![imagen claves](/AWS/Imagenes/claves.jpg)
+![imagen claves](img/claves.jpg)
 
 y podemos descargar el archivo.pem para utilizar WindowsPowerShell o el archivo.PPK para Putty
 
@@ -144,11 +144,11 @@ ssh -i "<ruta_archivo_labsuser.pem>" ubuntu@<DNS>
 ```
 Es conveniente que el archivo se encuentre en un lugar que no sea público y al ser posible que solo el usuario pueda acceder a él.  
 
-![imagen conexion](/AWS/Imagenes/conexion2.jpg)
+![imagen conexion](img/conexion2.jpg)
 
 Abrimos de nuevo una consola cmd, he utilizado una consola de git cmd y ahora nos dejará conectarnos, si eliges la opción del DNS es mejor puesto que la `ip publica` cambia cada vez que arranques la instancia, se puede configurar para que sea estática denominada en amazon ip-elástica pero nos consume recursos y realmente no hace falta. 
 
-![imagen conexion](/AWS/Imagenes/conectaranfitrion.jpg)
+![imagen conexion](img/conectaranfitrion.jpg)
 
 
 Si quieres conectarte utilizando Putty sigue el manual de ayuda que figura en la consola de AWS [Usuarios de Windows: Uso de SSH para conectarse](https://labs.vocareum.com/web/1265585/939488.0/ASNLIB/public/docs/lang/es-es/README.html#sshwindows)
