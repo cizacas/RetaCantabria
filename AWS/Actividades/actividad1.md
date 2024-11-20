@@ -65,7 +65,7 @@ La subred privada `lab-subnet-private1-us-east-1a` tiene un CIDR de **10.0.1.0/2
 
 No hemos creado un _NAT Gateway_ que es un recurso de VPC que se utiliza para proporcionar conectividad a Internet a cualquier instancia EC2 que se ejecute en subredes *privadas* en la VPC sin que esas instancias EC2 necesiten tener una conexión directa a la puerta de enlace de Internet porque es un servicio que consume muchos recursos y de momento no vamos a utilizarlo.
 
-![imagen vpc](/AWS/Imagenes/vpc.jpg)
+![imagen vpc](/AWS/Imagenes/vpc.png)
 
 
 ## Crear un grupo de seguridad
