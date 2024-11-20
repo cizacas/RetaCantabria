@@ -137,6 +137,7 @@ Las implementaciones ***Multi-AZ*** de Amazon RDS proporcionan mejoras en la dis
     - Desactivar **Habilitar actualización automática de versiones secundarias** .
 
    <i class="fas fa-comment"></i> Esto desactivará las copias de seguridad, lo que no suele recomendarse, pero permitirá una implementación más rápida de la base de datos para este ejercicio.
+   
 15. Haga clic en <span id="ssb_orange">Crear base de datos</span>
    Ahora se lanzará  el scrip de creación de la base de datos.
 16. Haga clic en **lab-db** (haga clic en el propio enlace).
