@@ -21,7 +21,7 @@ En este ejercicio vamos a crear una instancia de base de datos `MySQL` administr
 
 Al final, la infraestructura de la base de datos será la siguiente:
 
-<img src="/AWS/Imagenes/imagenfinal2.png" width="800">
+<img src="img/imagenfinal2.png" width="800">
 
 ## Crear un grupo de seguridad para la instancia de base de datos de RDS
 
