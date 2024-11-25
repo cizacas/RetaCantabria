@@ -4,7 +4,7 @@ En este seminario, exploraremos los servicios más utilizados de Amazon Web Serv
 
 ## Indice 🚀
 
-**1. Actividad 1.Crear VPC, grupo seguridad y EC2.**
+**1. Actividad 1. Crear VPC, grupo seguridad y EC2.**
 [Actividad 1.](AWS/actividad1.md)
 
 **2. Actividad 2. Instalación de un servidor web**
