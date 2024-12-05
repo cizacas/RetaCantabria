@@ -121,15 +121,18 @@ Las implementaciones ***Multi-AZ*** de Amazon RDS proporcionan mejoras en la dis
     - **Tipo de almacenamiento**: _SSD de uso general (gp3)_
     - **Almacenamiento asignado:** _20_
 10. En **Conectividad**, configuramos lo siguiente:
-    
+Opciones posibles:
+    - **Conectarse a un recurso informático de EC2**
+    - **Instancia EC2** _miServidorWeb_
+Otra opción:
     - **Nube privada virtual (VPC):** _Lab VPC_
-11. En **Grupos de subredes de la base de datos**, en la lista desplegable:
-    - Elegir _grupos de seguridad de base de datos_.
-    - Anule la selección _predeterminada_.
-12. En **Acceso público** , vamos a ponerlo `si`:
+1.  En **Grupos de subredes de la base de datos**, en la lista desplegable:
+   - Elegir _grupos de seguridad de base de datos_.
+    
+2.  En **Acceso público** , vamos a ponerlo `si`:
    Normalmente esta propiedad estara a no pero para permitir que nos conectemos desde fuera a la BD con el MySQLWorkbench lo vamos a poner público
-13. En **grupo de seguridad VPC firewall** vamos a crear uno nuevo para permitir la conexión exterior nombre `grupo acceso exterior bd`
-14. En **Configuración adicional** configuramos lo siguiente:
+3.  En **grupo de seguridad VPC firewall** vamos a crear uno nuevo para permitir la conexión exterior nombre `grupo acceso exterior bd`
+4.  En **Configuración adicional** configuramos lo siguiente:
     
     - **Nombre de base de datos inicial**: `lab`
     - Desactivar **Habilitar copias de seguridad automáticas**
@@ -138,12 +141,12 @@ Las implementaciones ***Multi-AZ*** de Amazon RDS proporcionan mejoras en la dis
 
    <i class="fas fa-comment"></i> Esto desactivará las copias de seguridad, lo que no suele recomendarse, pero permitirá una implementación más rápida de la base de datos para este ejercicio.
    
-15. Haga clic en <span id="ssb_orange">Crear base de datos</span>
+5.  Haga clic en <span id="ssb_orange">Crear base de datos</span>
    Ahora se lanzará  el scrip de creación de la base de datos.
-16. Haga clic en **lab-db** (haga clic en el propio enlace).
+6.  Haga clic en **lab-db** (haga clic en el propio enlace).
 
    Esperar **aproximadamente 4 minutos** para que se habilite la disponibilidad de la base de datos. El proceso de implementación implica la implementación de una base de datos en dos zonas de disponibilidad diferentes.
-17. Esperar hasta que **Información** cambie de **Modificando** a **Disponible**.
+7.  Esperar hasta que **Información** cambie de **Modificando** a **Disponible**.
 
 ## La instancia de RDS creada tenga acceso desde el exterior a traves de MySQLWorkbench
 
