@@ -13,4 +13,4 @@ En este seminario, exploraremos los servicios más utilizados de Amazon Web Serv
 **3. Actividad 3. Crear Base de Datos en RDS**
 [Actividad 3.](AWS/actividad3.md)
 
-[zip de la aplicación](AWS/pruebaPHPBD.zip)
+[Archivo zip de la aplicación de ejemplo](https://cizacas.github.io/RetaCantabria/pruebaPHPBD.zip)
