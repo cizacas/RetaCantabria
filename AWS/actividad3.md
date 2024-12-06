@@ -194,22 +194,24 @@ Ahora al grupo de subredes creado tendremos que configurar que cada una de las s
 2. Lo siguiente es subir al directorio de despliegue web la aplicación php desarrollada. Una forma es utilizando el [comando scp](https://desarrolloweb.com/articulos/transferir-archivos-scp-ssh.html)
    - Lo mejor es subir un archivo.zip.  Es posible que tengas que instalar en el servidor la aplicación zip y unzip
 ```sh
-scp -i "labsuser.pem" eb-demo-php-simple-app-v1.3.zip ubuntu@ec2-34-207-226-176.compute-1.ama
+scp -i "labsuser.pem" pruebaPHPBD.zip ubuntu@ec2-34-207-226-176.compute-1.ama
 zonaws.com:/var/www/miWeb
 # instalar zip y unzip
 apt install zip
 # descomprimir
-unzip eb-demo-php-simple-app-v1.3.zip
+unzip pruebaPHPBD.zip
 ```
-3. Tendremos que instalar composer en el servidor. Un artículo de ayuda es https://www.ionos.es/digitalguide/servidores/configuracion/instalar-php-composer-en-ubuntu-2204/
+los dos siguientes pasos solo son necesarios si la aplicación utiliza composer para la carga de librerias externas:
+   a. Tendremos que instalar composer en el servidor. Un artículo de ayuda es https://www.ionos.es/digitalguide/servidores/configuracion/instalar-php-composer-en-ubuntu-2204/
 ```sh
 apt install curl php-mbstring git
 # instalar composer
 curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
 composer
 ```
-4. Realizar los cambios en el fichero .env  y es posible en la configuración del virtual host para que el directorio de despliegue coincida con nuestra estructura de carpetas
-5. Conectar la BD con la instancia EC2. En **RDS** seleccionamos la base de datos `lab-db`  y en el botón **Acciones** tenemos la acción `Configurar conexión de EC2`  seleccionamos nuestra instancia _miServidorWeb_ y se crean los grupos de seguridad **rds-ec2-1**  y **ec2-rds-1** que abren las conexiones entre la RDS y la instancia.
-6. Estamos en condiciones de probar la conexión y el funcionamiento de la web
+  b. Realizar los cambios en el fichero .env  y es posible en la configuración del virtual host para que el directorio de despliegue coincida con nuestra estructura de carpetas.
+   
+3. Conectar la BD con la instancia EC2. En **RDS** seleccionamos la base de datos `lab-db`  y en el botón **Acciones** tenemos la acción `Configurar conexión de EC2`  seleccionamos nuestra instancia _miServidorWeb_ y se crean los grupos de seguridad **rds-ec2-1**  y **ec2-rds-1** que abren las conexiones entre la RDS y la instancia.
+4. Estamos en condiciones de probar la conexión y el funcionamiento de la web
 
   
