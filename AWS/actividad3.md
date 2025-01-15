@@ -56,17 +56,18 @@ Crearemos un grupo de seguridad para permitir que el servidor web acceda a la in
 
 ## Crear un grupo de subredes de base de datos
 
-Antes de realizar este paso debemos crear otra zona de disponibilidad por ejemplo en **us-east-1b** y crear una subred pública con un **10.0.2.0/24** y una subred privada **10.0.3.0/24**
+Antes de realizar este paso debemos crear otra zona de disponibilidad por ejemplo en **us-east-1b** y crear una subred pública con un **10.0.2.0/24** y una subred privada **10.0.3.0/24**. Solo vamos a trabajar con la subred privada de esta nueva zona de disponibilidad.
 1. En el menú <span id="ssb_services">Servicios<i class="fas fa-angle-down"></i></span>, haga clic en **VPC**.
 2. En el panel de navegación izquierdo, haga clic en **Subredes**.
 3. Haga clic en <span id="ssb_orange">Crear subred</span> y, a continuación, configure lo siguiente:
    - **VPC:** _VPC de laboratorio_
-   - **Nombre:** `lab-subnet-public2-us-east-1b`
+   - **Nombre:** `lab-subnet-private2-us-east-1b`
    - **Zona de disponibilidad:** us-east-1b
    - **Bloque CIDR:** 10.0.0.16
-   - **Bloque de CIDR de la subred:** 10.0.2.0/24 
+   - **Bloque de CIDR de la subred:**  10.0.3.0/24 
 
-y agregamos otra subred, con nombre  `lab-subnet-private2-us-east-1b` y 10.0.3.0/24
+y agregamos otra subred en este caso pública, con nombre `lab-subnet-public2-us-east-1b` y 10.0.2.0/24, pero que no vamos a utilizar.
+
 4. Nos desplazamos hacia abajo hasta la sección **Crear subred**.
 
 Crearemos un _grupo de subredes de base de datos_ que se emplea a fin de informar a RDS acerca de qué subredes se pueden utilizar para la base de datos. Cada grupo de subredes de base de datos requiere subredes en al menos dos zonas de disponibilidad.
