@@ -132,14 +132,14 @@ apt update
 ```
 2. Instalar php
 ```sh
-apt install php libapache2-mod-php php-mysql
+apt install php php-mysql
 ```
 3. Configurar php
-Para configurar este lenguaje de programación trabajaremos en primer lugar sobre el archivo de configuración del módulo del servicio web. Si has instalado la versión incluida en Ubuntu 24.04 LTS. El fichero de configuración `php.ini` se encuentra en `/etc/php/8.3/apache2/php.ini`
+Para configurar este lenguaje de programación trabajaremos en primer lugar sobre el archivo de configuración del módulo del servicio web. Si has instalado la versión incluida en Ubuntu 22.04 LTS. El fichero de configuración `php.ini` se encuentra en `/etc/php/8.1/apache2/php.ini`
 
 Minimamente deberiamos poner la zona horaria del servidor directiva `date.timezone`  y la configuración por defecto del tratamiento de errores está para un entorno de producción  si lo queremos para un entorno de desarrollo debería ser cambiada.
 ```sh
-nano /etc/php/8.3/apache2/php.ini
+nano /etc/php/8.1/apache2/php.ini
 # cambiar la zona horaria
 date.timezone=Europe/Madrid
 # errores para desarrollo
