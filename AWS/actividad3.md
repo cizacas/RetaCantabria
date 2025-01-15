@@ -65,6 +65,7 @@ Antes de realizar este paso debemos crear otra zona de disponibilidad por ejempl
    - **Zona de disponibilidad:** us-east-1b
    - **Bloque CIDR:** 10.0.0.16
    - **Bloque de CIDR de la subred:** 10.0.2.0/24 
+
 y agregamos otra subred, con nombre  `lab-subnet-private2-us-east-1b` y 10.0.3.0/24
 4. Nos desplazamos hacia abajo hasta la sección **Crear subred**.
 
