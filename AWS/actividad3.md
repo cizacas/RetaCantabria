@@ -132,7 +132,7 @@ Otra opción:
    - Elegir _grupos de seguridad de base de datos_.
     
 2.  En **Acceso público** , vamos a ponerlo `si`:
-   Normalmente esta propiedad estara a no pero para permitir que nos conectemos desde fuera a la BD con el MySQLWorkbench lo vamos a poner público
+   Normalmente esta propiedad estara a no pero para permitir que nos conectemos desde fuera a la BD con el MySQLWorkbench lo vamos a poner público. Puede que no nos permita en ponerlo público si la VPC no tiene activado la generación de DNS host. Es una acción que permite ser modificada posteriormente.
 3.  En **grupo de seguridad VPC firewall** vamos a crear uno nuevo para permitir la conexión exterior nombre `grupo acceso exterior bd`
 4.  En **Configuración adicional** configuramos lo siguiente:
     
@@ -150,13 +150,16 @@ Otra opción:
    Esperar **aproximadamente 4 minutos** para que se habilite la disponibilidad de la base de datos. El proceso de implementación implica la implementación de una base de datos en dos zonas de disponibilidad diferentes.
 7.  Esperar hasta que **Información** cambie de **Modificando** a **Disponible**.
 
+Si la BD no ha permitido ponerlo público debemos ir al servicio **VPC**, seleccionar nuestra vpc denominada `lab`  a la opción `acciones`  **editar la configuración de la VPC**  y habilitar nombres de host DNS.
+A continuación, ir al servicio de base de datos **RDS**, selecciona la bd creada denominada `lab-db` y a la opción `modificar` y nos permite modificar y poner **accesible públicamente** a `si`.  
+
 ## La instancia de RDS creada tenga acceso desde el exterior a traves de MySQLWorkbench
 
 Esto no es habitual porque como hemos visto la base de datos ha sido creada en las redes privadas, es decir, sin acceso desde el exterior.
 Un paso que hemos realizado anteriormente es crear la base de datos con **acceso público**  y ahora tendremos que abrir el paso de acceso a través de internet.
 y hemos añadido un nuevo grupo de seguridad  `grupo acceso exterior bd`
 
-Al grupo de seguridad creado añadimos una nueva regla de entrada para que permita la conexión desde cualquier ip por el puerto 3306. Otra opción más segura es crear un *NAT Gateway* .
+Al grupo de seguridad creado añadimos una nueva regla de entrada para que permita la conexión desde cualquier ip por el puerto 3306. Otra opción más segura es crear un *NAT Gateway* o también solo habilitar que la conexión sea desde tú ip.
 
 1. En la **consola de administración de AWS**, encontraremos el menú <span id="ssb_services">Servicios, <i class="fas fa-angle-down"></i></span> donde debe hacer clic en **VPC**.
 
@@ -196,8 +199,7 @@ Ahora al grupo de subredes creado tendremos que configurar que cada una de las s
 2. Lo siguiente es subir al directorio de despliegue web la aplicación php desarrollada. Una forma es utilizando el [comando scp](https://desarrolloweb.com/articulos/transferir-archivos-scp-ssh.html)
    - Lo mejor es subir un archivo.zip.  Es posible que tengas que instalar en el servidor la aplicación zip y unzip
 ```sh
-scp -i "labsuser.pem" pruebaPHPBD.zip ubuntu@ec2-34-207-226-176.compute-1.ama
-zonaws.com:/var/www/miWeb
+scp -i "labsuser.pem" pruebaPHPBD.zip ubuntu@ec2-34-207-226-176.compute-1.amazonaws.com:/var/www/miWeb
 # instalar zip y unzip
 apt install zip
 # descomprimir
@@ -212,8 +214,12 @@ curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/loca
 composer
 ```
   b. Realizar los cambios en el fichero .env  y es posible en la configuración del virtual host para que el directorio de despliegue coincida con nuestra estructura de carpetas.
-   
-3. Conectar la BD con la instancia EC2. En **RDS** seleccionamos la base de datos `lab-db`  y en el botón **Acciones** tenemos la acción `Configurar conexión de EC2`  seleccionamos nuestra instancia _miServidorWeb_ y se crean los grupos de seguridad **rds-ec2-1**  y **ec2-rds-1** que abren las conexiones entre la RDS y la instancia.
-4. Estamos en condiciones de probar la conexión y el funcionamiento de la web
 
-  
+Como esta aplicación no utiliza composer en vez de cambiar el fichero .env , debemos cambiar en el fichero `conexionBD.php` el host, usuario y password de la base de datos que se encuentra dentro del directorio Clases.
+también tienes que ejecutar el script  de base de datos `dwes_01_nba.sql` que se encuentra dentro del archivo zip  `pruebaPHPBD`
+   
+1. Conectar la BD con la instancia EC2. En **RDS** seleccionamos la base de datos `lab-db`  y en el botón **Acciones** tenemos la acción `Configurar conexión de EC2`  si no lo hemos realizado con anterioridad, seleccionamos nuestra instancia _miServidorWeb_ y se crean los grupos de seguridad **rds-ec2-1**  y **ec2-rds-1** que abren las conexiones entre la RDS y la instancia.
+2. Estamos en condiciones de probar la conexión y el funcionamiento de la web
+
+Ejemplo
+![imagen web](img/web.jpg)
